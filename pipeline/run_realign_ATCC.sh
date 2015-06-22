@@ -1,11 +1,11 @@
-#PBS -l nodes=1:ppn=1,mem=16gb,walltime=25:00:00 -q js -j oe -N realign
+#PBS -l nodes=1:ppn=1,mem=40gb,walltime=25:00:00 -q js -j oe -N realign
 module load java
 module load GATK/3.4.0
 module load picard
 
-MEM=16g
-GENOMEIDX=/shared/stajichlab/projects/Candida/HMAC/Clus_reseq/Aln/U5C_Ref/candida_lusitaniae_U5C.fasta
-BAMDIR=bam_U5C
+MEM=40g
+GENOMEIDX=/shared/stajichlab/projects/HMAC/Clus_reseq/Aln/ATCC_Ref/candida_lusitaniae_ATCC_42720.fasta
+BAMDIR=bam_ATCC
 SAMPLEFILE=samples.info
 if [ ! $CPU ]; then
  CPU=1
