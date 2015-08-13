@@ -1,4 +1,4 @@
-#PBS -q js -l nodes=1:ppn=24,mem=80gb -N GATK.GVCFGeno -j oe
+#PBS  -l nodes=1:ppn=24,mem=80gb -N GATK.GVCFGeno -j oe
 MEM=80
 module load java
 module load GATK/3.4.0

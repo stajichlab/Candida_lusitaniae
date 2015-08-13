@@ -1,4 +1,4 @@
-#PBS -q js -l nodes=1:ppn=32,mem=96gb -j oe -N bwa
+#PBS  -l nodes=1:ppn=32,mem=96gb -j oe -N bwa
 
 module load bwa/0.7.9
 module load samtools/1.1

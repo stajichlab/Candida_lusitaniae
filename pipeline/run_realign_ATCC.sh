@@ -1,4 +1,4 @@
-#PBS -l nodes=1:ppn=1,mem=40gb,walltime=25:00:00 -q js -j oe -N realign
+#PBS -l nodes=1:ppn=1,mem=40gb,walltime=25:00:00  -j oe -N realign
 module load java
 module load GATK/3.4.0
 module load picard
