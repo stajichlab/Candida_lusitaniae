@@ -1,12 +1,18 @@
-#PBS -l nodes=1:ppn=1,mem=16gb,walltime=25:00:00  -j oe -N realign
+#PBS -l nodes=1:ppn=1,mem=24gb,walltime=25:00:00  -j oe -N realign
 module load java
 module load gatk/3.4-46
 module load picard
 
-MEM=16g
-GENOMEIDX=/shared/stajichlab/projects/Candida/HMAC/Clus_reseq/Aln/U5C_Ref/candida_lusitaniae_U5C.fasta
-BAMDIR=bam_U5C
+MEM=24g
+GENOMEIDX=/bigdata/stajichlab/shared/projects/HMAC/Clus_reseq/Aln/ATCC_Ref/candida_lusitaniae_ATCC42720_w_CBS_6936_MT.fasta
+BAMDIR=bam_ATCC_MTfix
 SAMPLEFILE=samples.info
+b=`basename $GENOMEIDX .fasta`
+dir=`dirname $GENOMEIDX`
+if [ ! -f $dir/$b.dict ]; then
+ java -jar $PICARD CreateSequenceDictionary R=$GENOMEIDX O=$dir/$b.dict SPECIES="Candida lusitaniae" TRUNCATE_NAMES_AT_WHITESPACE=true
+fi
+
 if [ ! $CPU ]; then
  CPU=1
 fi
@@ -21,8 +27,8 @@ if [ ! $LINE ]; then
  echo "Need a number via PBS_ARRAYID or cmdline"
  exit
 fi
-
-ROW=`head -n $LINE $SAMPLEFILE | tail -n 1 | awk '{print $1}'`
+LINE=$LINE"p"
+ROW=`sed -n $LINE $SAMPLEFILE | awk '{print $1}'`
 
 echo "ROW is $ROW"
 if [ ! -f $BAMDIR/$ROW.DD.bam ]; then
@@ -30,7 +36,7 @@ if [ ! -f $BAMDIR/$ROW.DD.bam ]; then
   exit
 fi
 if [ ! -f $BAMDIR/$ROW.DD.bai ]; then
- java -jar $PICARD/BuildBamIndex.jar I=$BAMDIR/$ROW.DD.bam
+ java -jar $PICARD BuildBamIndex I=$BAMDIR/$ROW.DD.bam
 fi
 
 if [ ! -f $BAMDIR/$ROW.intervals ]; then 

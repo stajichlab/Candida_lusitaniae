@@ -1,6 +1,6 @@
 #PBS -l nodes=1:ppn=1,mem=16gb  -N U5C.filt -j oe
 
-module load gatk/3.4-0
+module load gatk/3.4-46
 module load java
 
 INFILE=Variants/C_lus.U5C.vcf

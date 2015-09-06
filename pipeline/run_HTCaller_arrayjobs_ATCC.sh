@@ -1,10 +1,10 @@
 #PBS -l nodes=1:ppn=16,mem=32gb,walltime=24:00:00  -j oe -N HTC.ATCC
 
 module load java
-module load GATK/3.4.0
+module load gatk/3.4-46
 module load picard
 INDIR=Aln/bam_ATCC
-GENOME=/shared/stajichlab/projects/HMAC/Clus_reseq/Aln/ATCC_Ref/candida_lusitaniae_ATCC_42720.fasta
+GENOME=/bigdata/stajichlab/shared/projects/HMAC/Clus_reseq/Aln/ATCC_Ref/candida_lusitaniae_ATCC_42720.fasta
 OUTDIR=Variants/ATCC
 b=`basename $GENOME .fasta`
 dir=`dirname $GENOME`
@@ -16,8 +16,9 @@ if [ ! $CPU ]; then
 fi
 
 if [ ! -f $dir/$b.dict ]; then
- java -jar $PICARD/CreateSequenceDictionary.jar \
- R=$GENOME OUTPUT=$dir/$b.dict
+ java -jar $PICARD CreateSequenceDictionary \
+ R=$GENOME OUTPUT=$dir/$b.dict \
+ SPECIES="Candida lusitaniae" TRUNCATE_NAMES_AT_WHITESPACE=true
 fi
 
 if [ ! $PBS_ARRAYID ]; then

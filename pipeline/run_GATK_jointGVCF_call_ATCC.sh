@@ -1,7 +1,7 @@
 #PBS  -l nodes=1:ppn=24,mem=128gb -N GATK.GVCFGeno -j oe
 MEM=128g
 module load java
-module load gatk/3.4-0
+module load gatk/3.4-46
 module load picard
 
 GENOME=/bigdata/stajichlab/shared/projects/Candida/HMAC/Clus_reseq/Aln/ATCC_Ref/candida_lusitaniae_ATCC_42720.fasta

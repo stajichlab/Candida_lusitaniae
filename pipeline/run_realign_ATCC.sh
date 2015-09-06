@@ -1,6 +1,6 @@
 #PBS -l nodes=1:ppn=1,mem=40gb,walltime=25:00:00  -j oe -N realign
 module load java
-module load GATK/3.4.0
+module load gatk
 module load picard
 
 MEM=40g
@@ -22,7 +22,8 @@ if [ ! $LINE ]; then
  exit
 fi
 
-ROW=`head -n $LINE $SAMPLEFILE | tail -n 1 | awk '{print $1}'`
+LINE=$LINE"p"
+ROW=`sed -n $LINE $SAMPLEFILE | awk '{print $1}'`
 
 echo "ROW is $ROW"
 if [ ! -f $BAMDIR/$ROW.DD.bam ]; then
@@ -30,7 +31,7 @@ if [ ! -f $BAMDIR/$ROW.DD.bam ]; then
   exit
 fi
 if [ ! -f $BAMDIR/$ROW.DD.bai ]; then
- java -jar $PICARD/BuildBamIndex.jar I=$BAMDIR/$ROW.DD.bam
+ java -jar $PICARD BuildBamIndex I=$BAMDIR/$ROW.DD.bam
 fi
 
 if [ ! -f $BAMDIR/$ROW.intervals ]; then 

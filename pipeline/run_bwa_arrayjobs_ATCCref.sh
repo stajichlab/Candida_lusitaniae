@@ -5,7 +5,7 @@ module load samtools/1.1
 module load java
 module load picard
 
-CPU=$PBS_PPN
+CPU=$PBS_NUM_PPN
 SAMPLEFILE=samples.info
 BWA=bwa
 GENOMEIDX=/shared/stajichlab/projects/HMAC/Clus_reseq/Aln/ATCC_Ref/candida_lusitaniae_ATCC_42720.fasta
