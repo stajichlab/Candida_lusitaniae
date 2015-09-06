@@ -1,10 +1,10 @@
-#PBS -l nodes=1:ppn=16,mem=32gb,walltime=24:00:00  -j oe -N HTC.ATCC
+#PBS -l nodes=1:ppn=16,mem=32gb,walltime=24:00:00  -j oe -N HTC.ATCCMTFix
 
 module load java
 module load gatk/3.4-46
 module load picard
 module load samtools
-INDIR=Aln/bam_ATCC
+INDIR=Aln/bam_ATCC_MTfix
 GENOME=/bigdata/stajichlab/shared/projects/HMAC/Clus_reseq/Aln/ATCC_Ref/candida_lusitaniae_ATCC42720_w_CBS_6936_MT.fasta
 OUTDIR=Variants/ATCC_MTfix
 b=`basename $GENOME .fasta`

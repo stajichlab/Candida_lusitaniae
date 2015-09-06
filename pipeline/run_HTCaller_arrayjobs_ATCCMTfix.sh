@@ -9,7 +9,7 @@ OUTDIR=Variants/ATCC
 b=`basename $GENOME .fasta`
 dir=`dirname $GENOME`
 
-CPU=$PBS_NP
+CPU=$PBS_NUM_PPN
 
 if [ ! $CPU ]; then 
  CPU=1
